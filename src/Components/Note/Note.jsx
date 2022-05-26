@@ -3,9 +3,9 @@ import React from 'react'
 import { useDrag } from 'react-dnd'
 import Types from 'Constants/ReactDndTypes'
 
-import { StyledNote } from './Styles.jsx'
+import { StyledNote, NoteItem } from './Styles.jsx'
 
-const Note = ({ id, left, top, hideSourceOnDrag, children }) => {
+const Note = ({ id, left, top, hideSourceOnDrag, notes }) => {
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: Types.NOTE,
@@ -22,8 +22,15 @@ const Note = ({ id, left, top, hideSourceOnDrag, children }) => {
 	}
 
 	return (
-		<StyledNote ref={drag} left={left} top={top} border>
-			{children}
+		<StyledNote
+			ref={drag}
+			left={left}
+			top={top}
+			isDragging={isDragging && hideSourceOnDrag}
+		>
+			{notes.map(({ id, note }) => (
+				<NoteItem key={id}>{note}</NoteItem>
+			))}
 		</StyledNote>
 	)
 }
