@@ -22,7 +22,7 @@ const Note = ({ id, left, top, children }) => {
 	}
 
 	return (
-		<StyledNote ref={drag} left={left} top={top}>
+		<StyledNote ref={drag} left={left} top={top} border>
 			{children}
 		</StyledNote>
 	)
