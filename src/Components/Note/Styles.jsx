@@ -7,8 +7,8 @@ export const StyledNote = styled.div`
 	padding: 0.5rem 1rem;
 	cursor: move;
 
-	top: ${props => props.top};
-	left: ${props => props.left};
+	top: ${props => props.top}px;
+	left: ${props => props.left}px;
 
 	&:hover {
 		border: 1px dashed gray;
