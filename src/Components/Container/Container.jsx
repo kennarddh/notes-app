@@ -49,7 +49,13 @@ const Container = () => {
 				const { left, top, notes } = Notes[id]
 
 				return (
-					<Note key={id} id={id} left={left} top={top}>
+					<Note
+						key={id}
+						id={id}
+						left={left}
+						top={top}
+						hideSourceOnDrag
+					>
 						{notes.toString()}
 					</Note>
 				)

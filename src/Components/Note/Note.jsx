@@ -5,7 +5,7 @@ import Types from 'Constants/ReactDndTypes'
 
 import { StyledNote } from './Styles.jsx'
 
-const Note = ({ id, left, top, children }) => {
+const Note = ({ id, left, top, hideSourceOnDrag, children }) => {
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: Types.NOTE,
@@ -17,7 +17,7 @@ const Note = ({ id, left, top, children }) => {
 		[id, left, top]
 	)
 
-	if (isDragging) {
+	if (isDragging && hideSourceOnDrag) {
 		return <StyledNote ref={drag} />
 	}
 
