@@ -31,9 +31,19 @@ const NotesProvider = ({ children }) => {
 		})
 	}
 
+	const ChangeNoteTitle = (noteId, title) => {
+		SetNotes(notes => ({ ...notes, [noteId]: { ...notes[noteId], title } }))
+	}
+
 	return (
 		<NotesContext.Provider
-			value={{ Notes, SetNotes, MoveNote, ChangeNoteItemText }}
+			value={{
+				Notes,
+				SetNotes,
+				MoveNote,
+				ChangeNoteItemText,
+				ChangeNoteTitle,
+			}}
 		>
 			{children}
 		</NotesContext.Provider>

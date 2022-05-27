@@ -20,12 +20,20 @@ export const StyledNote = styled.div`
 	border-radius: 15px;
 `
 
-export const NoteTitle = styled.h4`
-	margin: 0;
-	padding: 0;
-
-	font-size: 15px;
+export const NoteTitle = styled.input`
+	padding: 5px 10px;
+	font-size: 16px;
 	font-weight: bold;
 
+	margin: 10px 0;
+
 	color: #333;
+
+	&:disabled {
+		color: #aaa;
+	}
 `
+
+NoteTitle.defaultProps = {
+	type: 'text',
+}
