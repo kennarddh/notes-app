@@ -1,5 +1,6 @@
 const DefaultNotes = {
 	'6668fd28-9d52-4dae-8572-4ce2c1135a92': {
+		title: 'title',
 		left: 0,
 		top: 0,
 		notes: [

@@ -19,3 +19,13 @@ export const StyledNote = styled.div`
 
 	border-radius: 15px;
 `
+
+export const NoteTitle = styled.h4`
+	margin: 0;
+	padding: 0;
+
+	font-size: 15px;
+	font-weight: bold;
+
+	color: #333;
+`

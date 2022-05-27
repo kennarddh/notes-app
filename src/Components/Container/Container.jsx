@@ -35,20 +35,9 @@ const Container = () => {
 				height: '100vh',
 			}}
 		>
-			{Object.keys(Notes).map(id => {
-				const { left, top, notes } = Notes[id]
-
-				return (
-					<Note
-						key={id}
-						id={id}
-						left={left}
-						top={top}
-						notes={notes}
-						hideSourceOnDrag
-					/>
-				)
-			})}
+			{Object.keys(Notes).map(id => (
+				<Note key={id} id={id} hideSourceOnDrag />
+			))}
 		</div>
 	)
 }

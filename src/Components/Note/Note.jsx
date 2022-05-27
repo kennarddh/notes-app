@@ -1,22 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { useDrag } from 'react-dnd'
 import Types from 'Constants/ReactDndTypes'
 
+import { NotesContext } from 'Contexts/Notes'
+
 import NoteItem from 'Components/NoteItem/NoteItem'
 
-import { StyledNote } from './Styles.jsx'
+import { StyledNote, NoteTitle } from './Styles.jsx'
 
-const Note = ({ id, left, top, hideSourceOnDrag, notes }) => {
+const Note = ({ id, hideSourceOnDrag }) => {
+	const { Notes } = useContext(NotesContext)
+
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: Types.NOTE,
-			item: { id, left, top },
+			item: { id, left: Notes[id].left, top: Notes[id].top },
 			collect: monitor => ({
 				isDragging: monitor.isDragging(),
 			}),
 		}),
-		[id, left, top]
+		[id, Notes[id].left, Notes[id].top]
 	)
 
 	if (isDragging && hideSourceOnDrag) {
@@ -26,11 +30,12 @@ const Note = ({ id, left, top, hideSourceOnDrag, notes }) => {
 	return (
 		<StyledNote
 			ref={drag}
-			left={left}
-			top={top}
+			left={Notes[id].left}
+			top={Notes[id].top}
 			isDragging={isDragging && hideSourceOnDrag}
 		>
-			{notes.map(({ id: NoteItemId, note }) => (
+			<NoteTitle>{Notes[id].title}</NoteTitle>
+			{Notes[id].notes.map(({ id: NoteItemId, note }) => (
 				<NoteItem
 					key={NoteItemId}
 					id={NoteItemId}
