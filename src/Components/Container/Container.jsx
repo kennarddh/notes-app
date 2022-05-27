@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { useDrop } from 'react-dnd'
 
@@ -40,6 +40,28 @@ const Container = () => {
 		[MoveNote]
 	)
 
+	const ChangeNoteItemText = (noteId, noteItemId, text) => {
+		SetNotes(notes => {
+			return {
+				...notes,
+				[noteId]: {
+					...notes[noteId],
+					notes: notes[noteId].notes.map(noteItem => {
+						if (noteItem.id === noteItemId) {
+							return { ...noteItem, note: text }
+						}
+
+						return noteItem
+					}),
+				},
+			}
+		})
+	}
+
+	const OnNoteChange = useCallback((noteId, id, text) => {
+		ChangeNoteItemText(noteId, id, text)
+	})
+
 	return (
 		<div
 			ref={drop}
@@ -58,6 +80,7 @@ const Container = () => {
 						left={left}
 						top={top}
 						notes={notes}
+						onNoteChange={OnNoteChange}
 						hideSourceOnDrag
 					/>
 				)
