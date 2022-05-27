@@ -7,7 +7,7 @@ import NoteItem from 'Components/NoteItem/NoteItem'
 
 import { StyledNote } from './Styles.jsx'
 
-const Note = ({ id, left, top, hideSourceOnDrag, notes, onNoteChange }) => {
+const Note = ({ id, left, top, hideSourceOnDrag, notes }) => {
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: Types.NOTE,
@@ -34,7 +34,7 @@ const Note = ({ id, left, top, hideSourceOnDrag, notes, onNoteChange }) => {
 				<NoteItem
 					key={NoteItemId}
 					id={NoteItemId}
-					onChange={(_, text) => onNoteChange(id, NoteItemId, text)}
+					noteId={id}
 					value={note}
 				/>
 			))}
