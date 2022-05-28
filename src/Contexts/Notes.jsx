@@ -10,27 +10,23 @@ const NotesProvider = ({ children }) => {
 	const [Notes, SetNotes, [Undo, Redo]] = useHistoryState(DefaultNotes)
 
 	const MoveNote = (id, left, top) => {
-		SetNotes(notes => {
-			return { ...notes, [id]: { ...notes[id], left, top } }
-		})
+		SetNotes(notes => ({ ...notes, [id]: { ...notes[id], left, top } }))
 	}
 
 	const ChangeNoteItemText = (noteId, noteItemId, text) => {
-		SetNotes(notes => {
-			return {
-				...notes,
-				[noteId]: {
-					...notes[noteId],
-					notes: notes[noteId].notes.map(noteItem => {
-						if (noteItem.id === noteItemId) {
-							return { ...noteItem, note: text }
-						}
+		SetNotes(notes => ({
+			...notes,
+			[noteId]: {
+				...notes[noteId],
+				notes: notes[noteId].notes.map(noteItem => {
+					if (noteItem.id === noteItemId) {
+						return { ...noteItem, note: text }
+					}
 
-						return noteItem
-					}),
-				},
-			}
-		})
+					return noteItem
+				}),
+			},
+		}))
 	}
 
 	const ChangeNoteTitle = (noteId, title) => {
