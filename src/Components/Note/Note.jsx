@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
 import { useDrag } from 'react-dnd'
 import Types from 'Constants/ReactDndTypes'
@@ -12,8 +12,6 @@ import { StyledNote, NoteTitle } from './Styles.jsx'
 const Note = ({ id, hideSourceOnDrag }) => {
 	const { Notes, ChangeNoteTitle } = useContext(NotesContext)
 
-	const [Title, SetTitle] = useState(Notes[id].title)
-
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: Types.NOTE,
@@ -26,7 +24,6 @@ const Note = ({ id, hideSourceOnDrag }) => {
 	)
 
 	const OnTitleChange = event => {
-		SetTitle(event.target.value)
 		ChangeNoteTitle(id, event.target.value)
 	}
 
@@ -41,7 +38,7 @@ const Note = ({ id, hideSourceOnDrag }) => {
 			top={Notes[id].top}
 			isDragging={isDragging && hideSourceOnDrag}
 		>
-			<NoteTitle value={Title} onChange={OnTitleChange} />
+			<NoteTitle value={Notes[id].title} onChange={OnTitleChange} />
 			{Notes[id].notes.map(({ id: NoteItemId, note }) => (
 				<NoteItem
 					key={NoteItemId}
