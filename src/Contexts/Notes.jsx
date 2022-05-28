@@ -1,11 +1,13 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext } from 'react'
+
+import { useHistoryState } from '@kennarddh/react-use-history-state'
 
 import DefaultNotes from 'Constants/DefaultNotes'
 
 export const NotesContext = createContext({})
 
 const NotesProvider = ({ children }) => {
-	const [Notes, SetNotes] = useState(DefaultNotes)
+	const [Notes, SetNotes, [Undo, Redo]] = useHistoryState(DefaultNotes)
 
 	const MoveNote = (id, left, top) => {
 		SetNotes(notes => {
@@ -43,6 +45,8 @@ const NotesProvider = ({ children }) => {
 				MoveNote,
 				ChangeNoteItemText,
 				ChangeNoteTitle,
+				Undo,
+				Redo,
 			}}
 		>
 			{children}
