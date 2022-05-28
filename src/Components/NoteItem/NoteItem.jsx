@@ -1,20 +1,23 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { NotesContext } from 'Contexts/Notes'
 
 import { StyledNoteItem } from './Styles'
 
-const NoteItem = ({ id, noteId, value, ...props }) => {
-	const { ChangeNoteItemText } = useContext(NotesContext)
-
-	const [Value, SetValue] = useState(value)
+const NoteItem = ({ id, noteId, index, ...props }) => {
+	const { ChangeNoteItemText, Notes } = useContext(NotesContext)
 
 	const OnChange = event => {
-		SetValue(event.target.value)
 		ChangeNoteItemText(noteId, id, event.target.value)
 	}
 
-	return <StyledNoteItem {...props} onChange={OnChange} value={Value} />
+	return (
+		<StyledNoteItem
+			{...props}
+			onChange={OnChange}
+			value={Notes[noteId].notes[index].note}
+		/>
+	)
 }
 
 export default NoteItem

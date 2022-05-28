@@ -39,12 +39,12 @@ const Note = ({ id, hideSourceOnDrag }) => {
 			isDragging={isDragging && hideSourceOnDrag}
 		>
 			<NoteTitle value={Notes[id].title} onChange={OnTitleChange} />
-			{Notes[id].notes.map(({ id: NoteItemId, note }) => (
+			{Notes[id].notes.map(({ id: NoteItemId }, index) => (
 				<NoteItem
 					key={NoteItemId}
 					id={NoteItemId}
 					noteId={id}
-					value={note}
+					index={index}
 				/>
 			))}
 		</StyledNote>
