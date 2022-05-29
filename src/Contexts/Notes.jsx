@@ -39,6 +39,18 @@ const NotesProvider = ({ children }) => {
 		return true
 	}
 
+	const Load = key => {
+		const data = localStorage.getItem(key)
+
+		if (!data) return false
+
+		const notes = JSON.parse(data)
+
+		SetNotes(notes)
+
+		return true
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -50,6 +62,7 @@ const NotesProvider = ({ children }) => {
 				Undo,
 				Redo,
 				Save,
+				Load,
 			}}
 		>
 			{children}
