@@ -33,6 +33,12 @@ const NotesProvider = ({ children }) => {
 		SetNotes(notes => ({ ...notes, [noteId]: { ...notes[noteId], title } }))
 	}
 
+	const Save = key => {
+		localStorage.setItem(key, JSON.stringify(Notes))
+
+		return true
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -43,6 +49,7 @@ const NotesProvider = ({ children }) => {
 				ChangeNoteTitle,
 				Undo,
 				Redo,
+				Save,
 			}}
 		>
 			{children}
