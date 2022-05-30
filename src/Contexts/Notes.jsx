@@ -53,17 +53,16 @@ const NotesProvider = ({ children }) => {
 		return true
 	}
 
-	const Add = () => {
+	const Add = ({ top = 0, left = 0 }) => {
 		const id = uuid()
 
 		SetNotes(notes => ({
 			...notes,
 			[id]: {
-				id,
 				title: '',
 				notes: [],
-				left: 0,
-				top: 0,
+				top,
+				left,
 			},
 		}))
 	}
