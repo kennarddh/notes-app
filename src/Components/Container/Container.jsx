@@ -6,6 +6,7 @@ import Types from 'Constants/ReactDndTypes'
 import Note from 'Components/Note/Note'
 
 import { NotesContext } from 'Contexts/Notes'
+import { ThemeContext } from 'Contexts/Theme'
 
 import AddButton from 'Components/AddButton/AddButton'
 
@@ -14,6 +15,8 @@ import { StyledContainer } from './Styles'
 const Container = () => {
 	const { Notes, MoveNote, Undo, Redo, Save, Load, Add } =
 		useContext(NotesContext)
+
+	const { ChangeTheme, Theme } = useContext(ThemeContext)
 
 	const [, drop] = useDrop(
 		() => ({
@@ -52,6 +55,13 @@ const Container = () => {
 			<button onClick={() => Save('notes_data')}>Save</button>
 			<button onClick={() => Load('notes_data')}>Load</button>
 			<AddButton />
+			<button
+				onClick={() =>
+					ChangeTheme(Theme === 'light' ? 'dark' : 'light')
+				}
+			>
+				{Theme === 'light' ? 'Dark' : 'Light'} Mode
+			</button>
 			{Object.keys(Notes).map(id => (
 				<Note key={id} id={id} hideSourceOnDrag />
 			))}

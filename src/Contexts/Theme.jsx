@@ -18,7 +18,7 @@ const ThemeProvider = ({ children }) => {
 	}
 
 	return (
-		<ThemeContext.Provider value={{ ChangeTheme }}>
+		<ThemeContext.Provider value={{ ChangeTheme, Theme }}>
 			<StyledThemeProvider theme={DefaultTheme[Theme]}>
 				{children}
 			</StyledThemeProvider>
