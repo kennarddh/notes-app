@@ -5,13 +5,16 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import Container from 'Components/Container/Container'
 import NotesProvider from 'Contexts/Notes'
+import ThemeProvider from 'Contexts/Theme'
 
 const App = () => {
 	return (
 		<DndProvider backend={HTML5Backend}>
-			<NotesProvider>
-				<Container />
-			</NotesProvider>
+			<ThemeProvider>
+				<NotesProvider>
+					<Container />
+				</NotesProvider>
+			</ThemeProvider>
 		</DndProvider>
 	)
 }
