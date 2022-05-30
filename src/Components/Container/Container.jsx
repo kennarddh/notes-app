@@ -9,6 +9,8 @@ import { NotesContext } from 'Contexts/Notes'
 
 import AddButton from 'Components/AddButton/AddButton'
 
+import { StyledContainer } from './Styles'
+
 const Container = () => {
 	const { Notes, MoveNote, Undo, Redo, Save, Load, Add } =
 		useContext(NotesContext)
@@ -38,7 +40,7 @@ const Container = () => {
 	)
 
 	return (
-		<div
+		<StyledContainer
 			ref={drop}
 			style={{
 				width: '100vw',
@@ -53,7 +55,7 @@ const Container = () => {
 			{Object.keys(Notes).map(id => (
 				<Note key={id} id={id} hideSourceOnDrag />
 			))}
-		</div>
+		</StyledContainer>
 	)
 }
 
