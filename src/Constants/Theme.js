@@ -1,6 +1,7 @@
 export default {
 	light: {
 		background: '#eee',
-		color: '#333',
+		text: '#333',
+		borderRadius: '15px',
 	},
 }

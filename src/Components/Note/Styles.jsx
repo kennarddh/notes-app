@@ -4,7 +4,9 @@ export const StyledNote = styled.div`
 	position: absolute;
 
 	background-color: ${props =>
-		props.isDragging === false ? '#eee' : 'transparent'};
+		props.isDragging === false
+			? props => props.theme.background
+			: 'transparent'};
 
 	padding: 5px 10px;
 	cursor: move;
@@ -17,7 +19,7 @@ export const StyledNote = styled.div`
 	align-items: flex-start;
 	justify-content: flex-start;
 
-	border-radius: 15px;
+	border-radius: ${props => props.theme.borderRadius};
 `
 
 export const NoteTitle = styled.input`
@@ -27,11 +29,7 @@ export const NoteTitle = styled.input`
 
 	margin: 10px 0;
 
-	color: #333;
-
-	&:disabled {
-		color: #aaa;
-	}
+	color: ${props => props.theme.text};
 `
 
 NoteTitle.defaultProps = {

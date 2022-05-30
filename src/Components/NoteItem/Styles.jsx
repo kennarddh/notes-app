@@ -6,11 +6,7 @@ export const StyledNoteItem = styled.input`
 
 	margin: 10px 0;
 
-	color: #333;
-
-	&:disabled {
-		color: #aaa;
-	}
+	color: ${props => props.theme.text};
 `
 
 StyledNoteItem.defaultProps = {
