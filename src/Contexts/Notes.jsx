@@ -2,6 +2,8 @@ import React, { createContext } from 'react'
 
 import { useHistoryState } from '@kennarddh/react-use-history-state'
 
+import { v4 as uuid } from 'uuid'
+
 import DefaultNotes from 'Constants/DefaultNotes'
 
 export const NotesContext = createContext({})
@@ -51,6 +53,21 @@ const NotesProvider = ({ children }) => {
 		return true
 	}
 
+	const Add = () => {
+		const id = uuid()
+
+		SetNotes(notes => ({
+			...notes,
+			[id]: {
+				id,
+				title: '',
+				notes: [],
+				left: 0,
+				top: 0,
+			},
+		}))
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -63,6 +80,7 @@ const NotesProvider = ({ children }) => {
 				Redo,
 				Save,
 				Load,
+				Add,
 			}}
 		>
 			{children}

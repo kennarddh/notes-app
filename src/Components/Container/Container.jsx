@@ -8,7 +8,8 @@ import Note from 'Components/Note/Note'
 import { NotesContext } from 'Contexts/Notes'
 
 const Container = () => {
-	const { Notes, MoveNote, Undo, Redo, Save, Load } = useContext(NotesContext)
+	const { Notes, MoveNote, Undo, Redo, Save, Load, Add } =
+		useContext(NotesContext)
 
 	const [, drop] = useDrop(
 		() => ({
@@ -39,6 +40,7 @@ const Container = () => {
 			<button onClick={Redo}>Redo</button>
 			<button onClick={() => Save('notes_data')}>Save</button>
 			<button onClick={() => Load('notes_data')}>Load</button>
+			<button onClick={Add}>Add</button>
 			{Object.keys(Notes).map(id => (
 				<Note key={id} id={id} hideSourceOnDrag />
 			))}
