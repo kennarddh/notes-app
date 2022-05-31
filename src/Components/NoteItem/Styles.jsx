@@ -9,6 +9,8 @@ export const StyledNoteItem = styled.input`
 	color: ${props => props.theme.text};
 
 	background-color: ${props => props.theme.light};
+
+	border: none;
 `
 
 StyledNoteItem.defaultProps = {
