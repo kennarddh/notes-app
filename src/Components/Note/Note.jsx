@@ -7,10 +7,10 @@ import { NotesContext } from 'Contexts/Notes'
 
 import NoteItem from 'Components/NoteItem/NoteItem'
 
-import { StyledNote, NoteTitle } from './Styles.jsx'
+import { StyledNote, NoteTitle, AddButton } from './Styles.jsx'
 
 const Note = ({ id, hideSourceOnDrag }) => {
-	const { Notes, ChangeNoteTitle } = useContext(NotesContext)
+	const { Notes, ChangeNoteTitle, AddNoteItem } = useContext(NotesContext)
 
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
@@ -39,6 +39,7 @@ const Note = ({ id, hideSourceOnDrag }) => {
 			isDragging={isDragging && hideSourceOnDrag}
 		>
 			<NoteTitle value={Notes[id].title} onChange={OnTitleChange} />
+			<AddButton onClick={() => AddNoteItem(id)}>Add</AddButton>
 			{Notes[id].notes.map(({ id: NoteItemId }, index) => (
 				<NoteItem
 					key={NoteItemId}
