@@ -67,6 +67,22 @@ const NotesProvider = ({ children }) => {
 		}))
 	}
 
+	const AddNoteItem = noteId => {
+		SetNotes(notes => ({
+			...notes,
+			[noteId]: {
+				...notes[noteId],
+				notes: [
+					...notes[noteId].notes,
+					{
+						id: uuid(),
+						note: '',
+					},
+				],
+			},
+		}))
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -80,6 +96,7 @@ const NotesProvider = ({ children }) => {
 				Save,
 				Load,
 				Add,
+				AddNoteItem,
 			}}
 		>
 			{children}
