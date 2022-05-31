@@ -32,6 +32,8 @@ export const NoteTitle = styled.input`
 	color: ${props => props.theme.text};
 
 	background-color: ${props => props.theme.light};
+
+	border: none;
 `
 
 NoteTitle.defaultProps = {
