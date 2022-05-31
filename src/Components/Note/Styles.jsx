@@ -52,4 +52,6 @@ export const AddButton = styled.button`
 	background-color: ${props => props.theme.light};
 
 	border-radius: ${props => props.theme.borderRadius};
+
+	border: none;
 `
