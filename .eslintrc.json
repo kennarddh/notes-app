@@ -7,7 +7,8 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:jest/all"
+		"plugin:jest/all",
+		"plugin:react-hooks/recommended"
 	],
 	"parserOptions": {
 		"ecmaFeatures": {
