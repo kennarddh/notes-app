@@ -12,12 +12,14 @@ import NoteDrop from 'Components/NoteDrop/NoteDrop'
 import {
 	StyledNote,
 	NoteTitle,
-	AddButton,
+	Button,
 	NoteItemContainer,
+	ButtonContainer,
 } from './Styles.jsx'
 
 const Note = ({ id, hideSourceOnDrag }) => {
-	const { Notes, ChangeNoteTitle, AddNoteItem } = useContext(NotesContext)
+	const { Notes, ChangeNoteTitle, AddNoteItem, RemoveNote } =
+		useContext(NotesContext)
 
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
@@ -46,7 +48,10 @@ const Note = ({ id, hideSourceOnDrag }) => {
 			isDragging={isDragging && hideSourceOnDrag}
 		>
 			<NoteTitle value={Notes[id].title} onChange={OnTitleChange} />
-			<AddButton onClick={() => AddNoteItem(id)}>Add</AddButton>
+			<ButtonContainer>
+				<Button onClick={() => AddNoteItem(id)}>Add</Button>
+				<Button onClick={() => RemoveNote(id)}>Remove</Button>
+			</ButtonContainer>
 			{Notes[id].notes.length === 0 && <NoteDrop noteId={id} />}
 			<NoteItemContainer>
 				{Notes[id].notes.map(({ id: NoteItemId }, index) => (
