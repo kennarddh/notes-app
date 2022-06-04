@@ -83,6 +83,18 @@ const NotesProvider = ({ children }) => {
 		}))
 	}
 
+	const RemoveNoteItem = (noteId, noteItemId) => {
+		SetNotes(notes => ({
+			...notes,
+			[noteId]: {
+				...notes[noteId],
+				notes: notes[noteId].notes.filter(
+					noteItem => noteItem.id !== noteItemId
+				),
+			},
+		}))
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -97,6 +109,7 @@ const NotesProvider = ({ children }) => {
 				Load,
 				Add,
 				AddNoteItem,
+				RemoveNoteItem,
 			}}
 		>
 			{children}
