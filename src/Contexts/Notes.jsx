@@ -95,6 +95,26 @@ const NotesProvider = ({ children }) => {
 		}))
 	}
 
+	const MoveNoteItem = (noteId, dragIndex, hoverIndex) => {
+		const noteItemHover = Notes[noteId].notes[hoverIndex]
+		const noteItemDrag = Notes[noteId].notes[dragIndex]
+
+		const notes = Object.assign([], Notes[noteId].notes, {
+			[hoverIndex]: noteItemDrag,
+			[dragIndex]: noteItemHover,
+		})
+
+		console.log({ Notes: Notes[noteId].notes, notes })
+
+		SetNotes(prevNotes => ({
+			...prevNotes,
+			[noteId]: {
+				...prevNotes[noteId],
+				notes,
+			},
+		}))
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -110,6 +130,7 @@ const NotesProvider = ({ children }) => {
 				Add,
 				AddNoteItem,
 				RemoveNoteItem,
+				MoveNoteItem,
 			}}
 		>
 			{children}
