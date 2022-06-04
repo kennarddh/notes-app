@@ -2,21 +2,26 @@ import React, { useContext } from 'react'
 
 import { NotesContext } from 'Contexts/Notes'
 
-import { StyledNoteItem } from './Styles'
+import { StyledNoteItem, NoteItemWrapper, RemoveButton } from './Styles'
 
 const NoteItem = ({ id, noteId, index, ...props }) => {
-	const { ChangeNoteItemText, Notes } = useContext(NotesContext)
+	const { ChangeNoteItemText, Notes, RemoveNoteItem } =
+		useContext(NotesContext)
 
 	const OnChange = event => {
 		ChangeNoteItemText(noteId, id, event.target.value)
 	}
-
 	return (
-		<StyledNoteItem
-			{...props}
-			onChange={OnChange}
-			value={Notes[noteId].notes[index].note}
-		/>
+		<NoteItemWrapper>
+			<StyledNoteItem
+				{...props}
+				onChange={OnChange}
+				value={Notes[noteId].notes[index].note}
+			/>
+			<RemoveButton onClick={() => RemoveNoteItem(noteId, id)}>
+				X
+			</RemoveButton>
+		</NoteItemWrapper>
 	)
 }
 
