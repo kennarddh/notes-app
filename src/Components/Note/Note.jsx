@@ -7,6 +7,8 @@ import { NotesContext } from 'Contexts/Notes'
 
 import NoteItem from 'Components/NoteItem/NoteItem'
 
+import NoteDrop from 'Components/NoteDrop/NoteDrop'
+
 import { StyledNote, NoteTitle, AddButton } from './Styles.jsx'
 
 const Note = ({ id, hideSourceOnDrag }) => {
@@ -40,6 +42,7 @@ const Note = ({ id, hideSourceOnDrag }) => {
 		>
 			<NoteTitle value={Notes[id].title} onChange={OnTitleChange} />
 			<AddButton onClick={() => AddNoteItem(id)}>Add</AddButton>
+			{Notes[id].notes.length === 0 && <NoteDrop noteId={id} />}
 			{Notes[id].notes.map(({ id: NoteItemId }, index) => (
 				<NoteItem
 					key={NoteItemId}
