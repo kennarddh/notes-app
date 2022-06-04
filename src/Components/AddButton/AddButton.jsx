@@ -1,7 +1,10 @@
 import React from 'react'
 
 import { useDrag } from 'react-dnd'
+
 import Types from 'Constants/ReactDndTypes'
+
+import Button from 'Components/Button/Button'
 
 const AddButton = () => {
 	const [{ isDragging }, drag] = useDrag(
@@ -15,9 +18,13 @@ const AddButton = () => {
 		[]
 	)
 
-	if (isDragging) return <button>Add</button>
+	if (isDragging) return <Button>Add</Button>
 
-	return <button ref={drag}>Add</button>
+	return (
+		<Button ref={drag} darker>
+			Add
+		</Button>
+	)
 }
 
 export default AddButton

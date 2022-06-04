@@ -12,6 +12,8 @@ import { ThemeContext } from 'Contexts/Theme'
 
 import AddButton from 'Components/AddButton/AddButton'
 
+import Button, { ButtonContainer } from 'Components/Button/Button'
+
 const Container = () => {
 	const { Notes, MoveNote, Undo, Redo, Save, Load, Add } =
 		useContext(NotesContext)
@@ -48,24 +50,40 @@ const Container = () => {
 				ref={drop}
 				style={{
 					width: '100vw',
-					height: '100vh',
+					height: '95vh',
 				}}
 			>
-				<button onClick={Undo}>Undo</button>
-				<button onClick={Redo}>Redo</button>
-				<button onClick={() => Save('notes_data')}>Save</button>
-				<button onClick={() => Load('notes_data')}>Load</button>
-				<AddButton />
-				<button
-					onClick={() =>
-						ChangeTheme(Theme === 'light' ? 'dark' : 'light')
-					}
+				<ButtonContainer
+					style={{
+						width: '35vw',
+						height: '5vh',
+					}}
 				>
-					{Theme === 'light' ? 'Dark' : 'Light'} Mode
-				</button>
+					<Button onClick={Undo} darker>
+						Undo
+					</Button>
+					<Button onClick={Redo} darker>
+						Redo
+					</Button>
+					<Button onClick={() => Save('notes_data')} darker>
+						Save
+					</Button>
+					<Button onClick={() => Load('notes_data')} darker>
+						Load
+					</Button>
+					<AddButton />
+					<Button
+						onClick={() =>
+							ChangeTheme(Theme === 'light' ? 'dark' : 'light')
+						}
+						darker
+					>
+						{Theme === 'light' ? 'Dark' : 'Light'} Mode
+					</Button>
+				</ButtonContainer>
 				{Object.keys(Notes).map(id => (
 					<Note key={id} id={id} hideSourceOnDrag />
-				))}{' '}
+				))}
 			</div>
 		</GridLines>
 	)
