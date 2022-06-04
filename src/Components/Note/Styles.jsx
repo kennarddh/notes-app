@@ -55,3 +55,21 @@ export const AddButton = styled.button`
 
 	border: none;
 `
+
+export const NoteItemContainer = styled.div`
+	overflow-y: auto;
+	height: 200px;
+
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: ${props => props.theme.backgroundColor};
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: ${props => props.theme.light};
+		border-radius: ${props => props.theme.borderRadius};
+	}
+`
