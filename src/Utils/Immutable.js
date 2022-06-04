@@ -2,7 +2,7 @@ export const Insert = (array, indexValueArray) => {
 	return indexValueArray.reduce(
 		(accumulator, [index, value]) => [
 			...accumulator.slice(0, index),
-			...value,
+			value,
 			...accumulator.slice(index),
 		],
 		array
