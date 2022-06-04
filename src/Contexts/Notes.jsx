@@ -162,6 +162,15 @@ const NotesProvider = ({ children }) => {
 		)
 	}
 
+	const RemoveNote = noteId => {
+		SetNotes(notes => {
+			// eslint-disable-next-line no-unused-vars
+			const { [noteId]: _, ...withoutRemoved } = notes
+
+			return withoutRemoved
+		})
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -180,6 +189,7 @@ const NotesProvider = ({ children }) => {
 				MoveNoteItem,
 				GetNoteItemByNoteId,
 				GetNoteItemIndex,
+				RemoveNote,
 			}}
 		>
 			{children}
