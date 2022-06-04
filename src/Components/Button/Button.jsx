@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Button = styled.button`
 	padding: 5px 10px;
@@ -9,7 +9,14 @@ const Button = styled.button`
 
 	color: ${props => props.theme.text};
 
-	background-color: ${props => props.theme.light};
+	${props =>
+		props.darker
+			? css`
+					background-color: ${props.theme.backgroundColor};
+			  `
+			: css`
+					background-color: ${props => props.theme.light};
+			  `};
 
 	border-radius: ${props => props.theme.borderRadius};
 
