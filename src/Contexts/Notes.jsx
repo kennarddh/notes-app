@@ -104,8 +104,6 @@ const NotesProvider = ({ children }) => {
 			[dragIndex]: noteItemHover,
 		})
 
-		console.log({ Notes: Notes[noteId].notes, notes })
-
 		SetNotes(prevNotes => ({
 			...prevNotes,
 			[noteId]: {
