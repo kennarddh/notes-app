@@ -9,13 +9,9 @@ import NoteItem from 'Components/NoteItem/NoteItem'
 
 import NoteDrop from 'Components/NoteDrop/NoteDrop'
 
-import {
-	StyledNote,
-	NoteTitle,
-	Button,
-	NoteItemContainer,
-	ButtonContainer,
-} from './Styles.jsx'
+import { StyledNote, NoteTitle, NoteItemContainer } from './Styles.jsx'
+
+import Button, { ButtonContainer } from 'Components/Button/Button'
 
 const Note = ({ id, hideSourceOnDrag }) => {
 	const { Notes, ChangeNoteTitle, AddNoteItem, RemoveNote } =
