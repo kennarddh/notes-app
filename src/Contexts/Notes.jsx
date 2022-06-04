@@ -95,19 +95,21 @@ const NotesProvider = ({ children }) => {
 		}))
 	}
 
-	const MoveNoteItem = (noteId, dragIndex, hoverIndex) => {
-		const noteItemHover = Notes[noteId].notes[hoverIndex]
-		const noteItemDrag = Notes[noteId].notes[dragIndex]
+	const MoveNoteItem = (drag, hover) => {
+		if (drag.noteId !== hover.noteId) return
 
-		const notes = Object.assign([], Notes[noteId].notes, {
-			[hoverIndex]: noteItemDrag,
-			[dragIndex]: noteItemHover,
+		const noteItemHover = GetNoteItemByNoteId(hover.noteId, hover.id)
+		const noteItemDrag = GetNoteItemByNoteId(drag.noteId, drag.id)
+
+		const notes = Object.assign([], Notes[hover.noteId].notes, {
+			[hover.index]: noteItemDrag,
+			[drag.index]: noteItemHover,
 		})
 
 		SetNotes(prevNotes => ({
 			...prevNotes,
-			[noteId]: {
-				...prevNotes[noteId],
+			[hover.noteId]: {
+				...prevNotes[hover.noteId],
 				notes,
 			},
 		}))

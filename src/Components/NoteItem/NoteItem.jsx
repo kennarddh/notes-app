@@ -18,21 +18,16 @@ const NoteItem = ({ id, noteId, index, ...props }) => {
 		ChangeNoteItemText(noteId, id, event.target.value)
 	}
 
-	const [{ handlerId }, drop] = useDrop({
+	const [, drop] = useDrop({
 		accept: Types.NOTE_ITEM,
-		collect(monitor) {
-			return {
-				handlerId: monitor.getHandlerId(),
-			}
-		},
 		hover(item, monitor) {
 			if (!ref.current) return
 
-			const dragIndex = item.index
-			const hoverIndex = index
+			const drag = { id: item.id, noteId: item.noteId, index: item.index }
+			const hover = { id, noteId, index }
 
 			// Don't replace items with themselves
-			if (dragIndex === hoverIndex) return
+			if (drag.id === hover.id) return
 
 			// Determine rectangle on screen
 			const hoverBoundingRect = ref.current?.getBoundingClientRect()
@@ -51,26 +46,26 @@ const NoteItem = ({ id, noteId, index, ...props }) => {
 			// When dragging downwards, only move when the cursor is below 50%
 			// When dragging upwards, only move when the cursor is above 50%
 			// Dragging downwards
-			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
+			if (drag.index < hover.index && hoverClientY < hoverMiddleY) return
 
 			// Dragging upwards
-			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return
+			if (drag.index > hover.index && hoverClientY > hoverMiddleY) return
 
 			// Time to actually perform the action
-			MoveNoteItem(noteId, dragIndex, hoverIndex)
+			MoveNoteItem(drag, hover)
 
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
 			// but it's good here for the sake of performance
 			// to avoid expensive index searches.
-			item.index = hoverIndex
+			item.index = hover.index
 		},
 	})
 
 	const [{ isDragging }, drag] = useDrag({
 		type: Types.NOTE_ITEM,
 		item: () => {
-			return { id, index }
+			return { id, noteId, index }
 		},
 		collect: monitor => ({
 			isDragging: monitor.isDragging(),
@@ -80,11 +75,7 @@ const NoteItem = ({ id, noteId, index, ...props }) => {
 	drag(drop(ref))
 
 	return (
-		<NoteItemWrapper
-			ref={ref}
-			data-handler-id={handlerId}
-			style={{ opacity: isDragging ? 0 : 1 }}
-		>
+		<NoteItemWrapper ref={ref} style={{ opacity: isDragging ? 0 : 1 }}>
 			<StyledNoteItem
 				{...props}
 				onChange={OnChange}
