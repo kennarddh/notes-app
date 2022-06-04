@@ -113,6 +113,10 @@ const NotesProvider = ({ children }) => {
 		}))
 	}
 
+	const GetNoteItemByNoteId = (noteId, noteItemId) => {
+		return Notes[noteId].notes.find(noteItem => noteItem.id === noteItemId)
+	}
+
 	return (
 		<NotesContext.Provider
 			value={{
@@ -129,6 +133,7 @@ const NotesProvider = ({ children }) => {
 				AddNoteItem,
 				RemoveNoteItem,
 				MoveNoteItem,
+				GetNoteItemByNoteId,
 			}}
 		>
 			{children}
