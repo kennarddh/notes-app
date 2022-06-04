@@ -76,7 +76,7 @@ const NoteItem = ({ id, noteId, index, ...props }) => {
 				value={Notes[noteId].notes[index].note}
 			/>
 			<RemoveButton onClick={() => RemoveNoteItem(noteId, id)}>
-				X
+				&#x2716;
 			</RemoveButton>
 		</NoteItemWrapper>
 	)
