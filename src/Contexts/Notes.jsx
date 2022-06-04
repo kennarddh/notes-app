@@ -4,6 +4,11 @@ import { useHistoryState } from '@kennarddh/react-use-history-state'
 
 import { v4 as uuid } from 'uuid'
 
+import {
+	Remove as ImmutableRemove,
+	Insert as ImmutableInsert,
+} from 'Utils/Immutable'
+
 import DefaultNotes from 'Constants/DefaultNotes'
 
 export const NotesContext = createContext({})
@@ -96,23 +101,59 @@ const NotesProvider = ({ children }) => {
 	}
 
 	const MoveNoteItem = (drag, hover) => {
-		if (drag.noteId !== hover.noteId) return
-
 		const noteItemHover = GetNoteItemByNoteId(hover.noteId, hover.id)
 		const noteItemDrag = GetNoteItemByNoteId(drag.noteId, drag.id)
 
-		const notes = Object.assign([], Notes[hover.noteId].notes, {
-			[hover.index]: noteItemDrag,
-			[drag.index]: noteItemHover,
-		})
+		if (drag.noteId !== hover.noteId) {
+			const notesHover = ImmutableInsert(Notes[hover.noteId].notes, [
+				[hover.index, noteItemDrag],
+			])
 
-		SetNotes(prevNotes => ({
-			...prevNotes,
-			[hover.noteId]: {
-				...prevNotes[hover.noteId],
-				notes,
-			},
-		}))
+			const notesDrag = ImmutableRemove(Notes[drag.noteId].notes, [
+				drag.index,
+			])
+
+			// console.log({ notesHover })
+			console.log(Notes[hover.noteId].notes)
+			console.log([[hover.index, noteItemDrag]])
+
+			console.log({
+				...Notes,
+				[hover.noteId]: {
+					...Notes[hover.noteId],
+					notes: notesHover,
+				},
+				[drag.noteId]: {
+					...Notes[drag.noteId],
+					notes: notesDrag,
+				},
+			})
+
+			SetNotes(prevNotes => ({
+				...prevNotes,
+				[hover.noteId]: {
+					...prevNotes[hover.noteId],
+					notes: notesHover,
+				},
+				[drag.noteId]: {
+					...prevNotes[drag.noteId],
+					notes: notesDrag,
+				},
+			}))
+		} else {
+			const notes = Object.assign([], Notes[hover.noteId].notes, {
+				[hover.index]: noteItemDrag,
+				[drag.index]: noteItemHover,
+			})
+
+			SetNotes(prevNotes => ({
+				...prevNotes,
+				[hover.noteId]: {
+					...prevNotes[hover.noteId],
+					notes,
+				},
+			}))
+		}
 	}
 
 	const GetNoteItemByNoteId = (noteId, noteItemId) => {
