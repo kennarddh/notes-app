@@ -113,10 +113,6 @@ const NotesProvider = ({ children }) => {
 				drag.index,
 			])
 
-			// console.log({ notesHover })
-			console.log(Notes[hover.noteId].notes)
-			console.log([[hover.index, noteItemDrag]])
-
 			console.log({
 				...Notes,
 				[hover.noteId]: {
