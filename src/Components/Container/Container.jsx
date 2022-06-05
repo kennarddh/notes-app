@@ -2,8 +2,6 @@ import React, { useContext } from 'react'
 
 import { useDrop } from 'react-dnd'
 
-import GridLines from 'react-gridlines'
-
 import Types from 'Constants/ReactDndTypes'
 import Note from 'Components/Note/Note'
 
@@ -13,6 +11,8 @@ import { ThemeContext } from 'Contexts/Theme'
 import AddButton from 'Components/AddButton/AddButton'
 
 import Button, { ButtonContainer } from 'Components/Button/Button'
+
+import {StyledGridLines} from './Styles.jsx'
 
 const Container = () => {
 	const { Notes, MoveNote, Undo, Redo, Save, Load, Add } =
@@ -45,7 +45,7 @@ const Container = () => {
 	)
 
 	return (
-		<GridLines cellWidth={30} strokeWidth={1}>
+		<StyledGridLines cellWidth={30} strokeWidth={1}>
 			<div
 				ref={drop}
 				style={{
@@ -85,7 +85,7 @@ const Container = () => {
 					<Note key={id} id={id} hideSourceOnDrag />
 				))}
 			</div>
-		</GridLines>
+		</StyledGridLines>
 	)
 }
 
