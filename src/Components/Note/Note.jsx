@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 
 import { useDrag } from 'react-dnd'
 import Types from 'Constants/ReactDndTypes'
@@ -17,6 +17,8 @@ const Note = ({ id, hideSourceOnDrag }) => {
 	const { Notes, ChangeNoteTitle, AddNoteItem, RemoveNote } =
 		useContext(NotesContext)
 
+	const NoteItemRef = useRef([])
+
 	const [{ isDragging }, drag] = useDrag(
 		() => ({
 			type: Types.NOTE,
@@ -31,6 +33,12 @@ const Note = ({ id, hideSourceOnDrag }) => {
 	const OnTitleChange = event => {
 		ChangeNoteTitle(id, event.target.value)
 	}
+
+	const notes = Notes[id].notes
+
+	useEffect(() => {
+		if (NoteItemRef.current.at(-1)) NoteItemRef.current.at(-1).focus()
+	}, [notes])
 
 	if (isDragging && hideSourceOnDrag) {
 		return <StyledNote ref={drag} />
@@ -52,6 +60,7 @@ const Note = ({ id, hideSourceOnDrag }) => {
 			<NoteItemContainer>
 				{Notes[id].notes.map(({ id: NoteItemId }, index) => (
 					<NoteItem
+						ref={element => (NoteItemRef.current[index] = element)}
 						key={NoteItemId}
 						id={NoteItemId}
 						noteId={id}

@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, forwardRef } from 'react'
 
 import { useDrag, useDrop } from 'react-dnd'
 
@@ -8,9 +8,14 @@ import { NotesContext } from 'Contexts/Notes'
 
 import { StyledNoteItem, NoteItemWrapper, RemoveButton } from './Styles'
 
-const NoteItem = ({ id, noteId, index, ...props }) => {
-	const { ChangeNoteItemText, Notes, RemoveNoteItem, MoveNoteItem } =
-		useContext(NotesContext)
+const NoteItem = ({ id, noteId, index, ...props }, inputRef) => {
+	const {
+		ChangeNoteItemText,
+		Notes,
+		RemoveNoteItem,
+		MoveNoteItem,
+		AddNoteItem,
+	} = useContext(NotesContext)
 
 	const ref = useRef(null)
 
@@ -66,13 +71,21 @@ const NoteItem = ({ id, noteId, index, ...props }) => {
 		}),
 	})
 
+	const OnKeyDown = event => {
+		if (event.key === 'Enter') {
+			AddNoteItem(noteId)
+		}
+	}
+
 	drag(drop(ref))
 
 	return (
 		<NoteItemWrapper ref={ref} style={{ opacity: isDragging ? 0 : 1 }}>
 			<StyledNoteItem
 				{...props}
+				ref={inputRef}
 				onChange={OnChange}
+				onKeyDown={OnKeyDown}
 				value={Notes[noteId].notes[index].note}
 			/>
 			<RemoveButton onClick={() => RemoveNoteItem(noteId, id)}>
@@ -82,4 +95,4 @@ const NoteItem = ({ id, noteId, index, ...props }) => {
 	)
 }
 
-export default NoteItem
+export default forwardRef(NoteItem)
