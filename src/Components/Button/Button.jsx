@@ -12,7 +12,7 @@ const Button = styled.button`
 	${props =>
 		props.darker
 			? css`
-					background-color: ${props.theme.backgroundColor};
+					background-color: ${props.theme.topBarButton};
 			  `
 			: css`
 					background-color: ${props => props.theme.light};
