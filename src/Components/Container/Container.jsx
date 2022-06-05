@@ -12,7 +12,7 @@ import AddButton from 'Components/AddButton/AddButton'
 
 import Button, { ButtonContainer } from 'Components/Button/Button'
 
-import {StyledGridLines} from './Styles.jsx'
+import { StyledGridLines } from './Styles.jsx'
 
 const Container = () => {
 	const { Notes, MoveNote, Undo, Redo, Save, Load, Add } =
