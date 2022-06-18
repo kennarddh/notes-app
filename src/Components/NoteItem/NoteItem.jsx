@@ -25,7 +25,7 @@ const NoteItem = ({ id, noteId, index, ...props }, inputRef) => {
 
 	const [, drop] = useDrop({
 		accept: Types.NOTE_ITEM,
-		hover(item, monitor) {
+		drop(item, monitor) {
 			if (!ref.current) return
 
 			const drag = { id: item.id, noteId: item.noteId, index: item.index }
